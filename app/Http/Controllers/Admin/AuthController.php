@@ -16,7 +16,7 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required'
         ]);
 
@@ -31,12 +31,13 @@ class AuthController extends Controller
         // return json
         return response()->json([
             'message' => 'Email atau password salah'
-        ], 401);
+        ], 200);
+        return redirect()->route('login');
     }
 
     public function logout()
     {
         auth()->logout();
-        return redirect()->route('admin.login');
+        return redirect()->route('login');
     }
 }
